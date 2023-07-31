@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+  <div class="container">
+    <h1>Progress Bar</h1>
+    <div class="input-container">
+      <label for="start-time">Start Time:</label>
+      <input type="time" id="start-time" value="00:00">
+      <h1 id="percentage">0%</h1>
+    </div>
+    <div class="input-container">
+      <label for="end-time">End Time:</label>
+      <input type="time" id="end-time" value="23:59">
+    </div>
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+    
+  </div>
+  
+  <div class="tasks-container" id="tasks-container">
+    <h2>To Do:</h2>
+    
+  </div>
+
+  <div class="task-input-container">
+    <input class="task-input" type="text" id="task-input" placeholder="Add Task">
+  </div>
+
+  <script src="script.js"></script>
+  <!-- Other JavaScript code -->
+
+  <script>
+    // Add event listener to the input box to detect Enter key press
+    const taskInput = document.getElementById("task-input");
+    taskInput.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        addTask(this.value.trim());
+        this.value = ""; // Clear the input after adding the task
+      }
+    });
+
+    function addTask(taskInput) {
+      if (taskInput !== "") {
+        const taskItem = document.createElement("div");
+        taskItem.classList.add("task-item");
+        taskItem.textContent = taskInput;
+
+        const deleteTaskButton = document.createElement("span");
+        deleteTaskButton.classList.add("delete-task");
+        deleteTaskButton.textContent = "x";
+        deleteTaskButton.onclick = function() {
+          deleteTask(taskItem);
+        };
+
+        taskItem.appendChild(deleteTaskButton);
+
+        const tasksContainer = document.getElementById("tasks-container");
+        tasksContainer.appendChild(taskItem);
+      }
+    }
+
+    function deleteTask(taskItem) {
+      const tasksContainer = document.getElementById("tasks-container");
+      tasksContainer.removeChild(taskItem);
+    }
+
+  </script>
+ 
+  <!-- test --> 
+  <script src="script.js"></script>
+
+  <!-- Ensure Confetti.js is loaded after script.js -->
+  <script src="confetti.js"></script>
+  
+  
+  <div class="canvas-wrapper"></div>
+</body>
+</html>
